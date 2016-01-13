@@ -1,28 +1,70 @@
-== README
+==Welcome to WDI-CONF!
+===============================
+To set up:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+fork the repo to your own github repo.
+clone from your own github to your local computer.
+Then set up locally:
 
-Things you may want to cover:
+configure .gitignore
+configure your database.yml and add to .gitignore
+bundle install
+Do whatever mac thing you need to do.
+rake db:create
+rake db:migrate
+rails server (or rails s)
+in browser go to localhost:3000 to see if it all worked.
 
-* Ruby version
 
-* System dependencies
+=== About the site:
+WDI Conf is a website created for a semi-fictional tech conference. The site was based on current design trends found on many conference websites, namely; centre-aligned text, subtle animations to guide you through the site and a simple colour palate.
 
-* Configuration
 
-* Database creation
+=== Team roles:
+Greg: Front-end, back-end. Ticking system
+Bono: Front-end, back-end, payment, ticketing ststem
+Asep: Git Lord, CSS master, email
+Ravi: Frongt-end, login in authentication, tweets
+Ashton: CSS
 
-* Database initialization
 
-* How to run the test suite
+=== What we used:
+- Trello for project management
+- Ruby on Rails
+- Javascript Libraries: Jquery, Underscore 
+- CSS
+- Postgresql
+- API: stripe.com, tweeter.com
 
-* Services (job queues, cache servers, search engines, etc.)
+
+===  What worked 
+- Clearly defined roles 
+- Opportunities for partner coding
+- Deployment for the site from the initial stages of the project
+- Clear concept about the content and features to be built, revised when needed
+- Everyone got to work with their strengths
+- Most members took a risk and tried something new
+- A relaxed environment
+
+
+=== What didn’t
+- GitHub glitches
+- Features put together doesnt work out properly
+- Not as reponsive as designed
+
+
+=== Things you may want to cover:
+
+* Ruby on Rails
+
+* Javascript
+
+* Database creation, initialization, 
+
+* Payment API, tweeter API, email API
+
+* Ticketing system 
 
 * Deployment instructions
 
 * ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
