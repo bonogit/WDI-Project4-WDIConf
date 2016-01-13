@@ -25,40 +25,34 @@
 
         <div class="row">
            <center>
-           <%= form_tag charges_path, id: 'stripeForm' do -%>
-             <script src="https://checkout.stripe.com/checkout.js"></script>
+              <script src="https://checkout.stripe.com/checkout.js"></script>
+               <button id="customButton" class="btn btn-primary byn-lg active">PROCEED TO PAYMENT</button>
 
-             <button id="stripe-button" class="btn btn-primary byn-lg active">PROCEED TO PAYMENT</button>
-             <%= hidden_field_tag 'stripeToken' %>
-             <%= hidden_field_tag 'stripeEmail' %>
-             <%= hidden_field_tag 'stripeAmount' %>
-           
-             <script>
-               var handler = StripeCheckout.configure({
-                 key: "<%= Rails.configuration.stripe[:publishable_key] %>",
-                 token: function (token, args) {
-                   $("#stripeToken").val(token.id);
-                   $("#stripeEmail").val(token.email);
-                   $("#stripeAmount").val('<%= @amount %>');
-                   $("#stripeForm").submit();
-                 }
-               });
-           
-               $('#stripe-button').on('click', function (e) {
-                 // Open Checkout with further options
-                 handler.open({
-                   name: 'Customer name',
-                   description: 'WDI4 Conf Ticket',
-                   amount: <%= @amount * 100 %>
-                 });
-               e.preventDefault();
-               });
-           
-               $(window).on('popstate', function() {
-                 handler.close();
-               });
-             </script>
-           <% end %>
+              <script>
+                var handler = StripeCheckout.configure({
+                  key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+                  locale: 'auto',
+                  token: function(token) {
+                    // Use the token to create the charge with a server-side script.
+                    // You can access the token ID with `token.id`
+                  }
+                });
+
+                $('#customButton').on('click', function(e) {
+                  // Open Checkout with further options
+                  handler.open({
+                    name: 'Stripe.com',
+                    description: '2 widgets',
+                    amount: <%= @amount %>
+                  });
+                  e.preventDefault();
+                });
+
+                // Close Checkout on page navigation
+                $(window).on('popstate', function() {
+                  handler.close();
+                });
+              </script>
     <!--        <br>
            <button id="return-button" class="btn btn-primary byn-lg active">BACK TO SEAT PICKING</button>
  -->          </center>

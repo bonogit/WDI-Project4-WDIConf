@@ -1,28 +1,33 @@
 class ChargesController < ApplicationController
   def new
 
-   pending_seats = Seat.where('pendingpayment = true')
+   # --agrregate all the peding seats ticket price
+   # pending_seats = Seat.where('pendingpayment = true')
+   # @amount = 0;
+   # pending_seats.each do | seat | 
+   #   @amount = @amount + seat.price
+
    @amount = 0;
-   pending_seats.each do | seat | 
-     @amount = @amount + seat.price
-     #puts @amount 
+   unique_seat = Seat.where('id = 201');
+   unique_seat.each do | seat |
+    @amount = @amount + seat.price;
+     # puts @amount 
      #puts seat.price
      #puts seat.id
      #puts seat.pendingpayment
    end
-
-
   end
   
   def create
     # Amount in cents
-    
-    @amount = params[:stripeAmount].to_i * 100
+    @amount = 10000
+    # @amount = params[:stripeAmount].to_i * 100
     # @email = params[:stripeEmail]
     
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
-      :card  => params[:stripeToken]
+      # :card  => params[:stripeToken]
+      :source => params[:stripeToken]
     )
 
     charge = Stripe::Charge.create(
