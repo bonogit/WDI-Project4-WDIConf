@@ -53,7 +53,7 @@ Ashton: CSS
 - Not as reponsive as designed
 
 
-=== Things you may want to cover:
+=== Things I may want to cover:
 
 * Ruby on Rails
 
