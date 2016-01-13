@@ -14,16 +14,17 @@
         <h1 id="qr-code-title">Your WDI4 Conf Ticket</h1>
         <center>
 
-        <%@paid_seats.each do | paid_seat | %> 
+        <!-- <%@paid_seats.each do | paid_seat | %>  -->
           <div class="row">
             <div class="col-md-3">
-              <h4  class="ticket-text" id="name">DREW BARRYMORE</h4>
+              <h4  class="ticket-text" id="name">Email: </h4>
+              <h5>email@email.com</h5>
             </div>
           </div>
           <div class="col-md-3">
-            <h4  class="ticket-text" id="seat">Seat: <%=@paid_seat.id%></h4>
+            <h4  class="ticket-text" id="seat">Seat:</h4>
           </div>
-        <%end%>
+     <!--    <%end%> -->
 
         <!-- <center>
         <h3 id="amount">Total amount paid: <%#=@amount%></h3>

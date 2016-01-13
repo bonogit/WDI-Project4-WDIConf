@@ -27,10 +27,10 @@
 
         <div class="row">
            <center>
-           <%= form_tag charges_path, id: 'stripeForm' do -%>
-             <script src="https://checkout.stripe.com/checkout.js"></script>
+            <%= form_tag charges_path, id: 'stripeForm' do -%>
+             <script src="https://checkout.stripe.com/checkout.js"> </script>
+             <button id="stripe-button" class="btn btn-primary byn-lg active" type="submit">PROCEED TO PAYMENT</button>
 
-             <button id="stripe-button" class="btn btn-primary byn-lg active">PROCEED TO PAYMENT</button>
              <%= hidden_field_tag 'stripeToken' %>
              <%= hidden_field_tag 'stripeEmail' %>
              <%= hidden_field_tag 'stripeAmount' %>
@@ -38,7 +38,9 @@
              <script>
                var handler = StripeCheckout.configure({
                  key: "<%= Rails.configuration.stripe[:publishable_key] %>",
+                 locale: 'auto',
                  token: function (token, args) {
+                
                    $("#stripeToken").value = token.id;
                      $("#stripeEmail").value = token.email;
                      $("#stripeAmount").value = <%= @amount %>;
@@ -49,9 +51,10 @@
                $('#stripe-button').on('click', function (e) {
                  // Open Checkout with further options
                  handler.open({
-                   name: 'Customer name',
+                   name: 'Ticket Payment',
                    description: 'WDI4 Conf Ticket',
-                   amount: <%= @amount * 100 %>
+                   amount: <%= @amount * 100 %>,
+                   currency: "aud"
                  });
                e.preventDefault();
                });
@@ -60,7 +63,21 @@
                  handler.close();
                });
              </script>
-           <% end %>
+            <% end %>
+
+        <form action="/seats/tickets" method="get">
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-image="/img/documentation/checkout/marketplace.png"
+            data-name="Ticket Payment"
+            data-description="WDI Conf Ticket Payment"
+            data-currency="aud"
+            data-amount=<%= @amount*100 %>
+            data-locale="auto">
+          </script>
+        </form>
+
       </center>
       
         </div>

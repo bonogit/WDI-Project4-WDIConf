@@ -1,6 +1,6 @@
 class ChargesController < ApplicationController
-  def new
 
+  def new
    # --agrregate all the peding seats ticket price
    # pending_seats = Seat.where('pendingpayment = true')
    # @amount = 0;
@@ -20,21 +20,22 @@ class ChargesController < ApplicationController
   
   def create
     # Amount in cents
-    @amount = 10000
-    # @amount = params[:stripeAmount].to_i * 100
-    # @email = params[:stripeEmail]
     
+    @amount = params[:stripeAmount].to_i * 100
+    # @email = params[:stripeEmail]
+    # binding.pry
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
-      # :card  => params[:stripeToken]
-      :source => params[:stripeToken]
+      :card  => params[:stripeToken]
+      # :source => params[:stripeToken]
     )
 
+      # binding.pry
     charge = Stripe::Charge.create(
-      :customer    => customer.id,
       :amount      => @amount,
       :description => 'Rails Stripe customer',
-      :currency    => 'usd'
+      :currency    => 'aud'
+      # :source => params[:stripeToken]
     )
 
     rescue Stripe::CardError => e
